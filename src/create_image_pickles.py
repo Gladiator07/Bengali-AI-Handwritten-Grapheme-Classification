@@ -5,7 +5,7 @@ import glob
 from tqdm import tqdm
 
 if __name__=="__main__":
-    files = glob.glob("/root/content/train_*.parquet")
+    files = glob.glob("/root/input/train_*.parquet")
 
     for f in files:
         df = pd.read_parquet(f)
