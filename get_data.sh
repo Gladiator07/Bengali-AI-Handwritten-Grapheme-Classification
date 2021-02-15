@@ -11,7 +11,7 @@ kaggle_api_key_path='/content/drive/MyDrive/Kaggle/kaggle.json'
 
 # This snippet will install kaggle api and connect your api-key to it
 echo "Installing Kaggle API..."
-pip3 install -q kaggle
+pip3 install kaggle --upgrade
 mkdir -p ~/.kaggle
 echo "Setting up your Kaggle key to API..."
 cp /content/drive/MyDrive/Kaggle/kaggle.json ~/.kaggle/
@@ -31,3 +31,8 @@ unzip \*.zip
 echo "Deleting *.zip files"
 find . -name "*.zip" -type f -delete
 echo "Data downloaded and unzipped successfully..."
+
+
+echo "Installing dependencies"
+pip3 install iterative-stratification    # for MultiLabelStratifiedKfold
+ 
