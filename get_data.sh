@@ -29,5 +29,5 @@ echo "Unzipping *.parquet files"
 unzip \*.zip
 
 echo "Deleting *.zip files"
-rm \*.zip
+find . -name "*.zip" -type f -delete
 echo "Data downloaded and unzipped successfully..."
