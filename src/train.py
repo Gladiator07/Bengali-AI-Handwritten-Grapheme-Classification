@@ -37,7 +37,7 @@ def loss_fn(outputs, targets):
 
 def train(dataset, data_loader, model, optimizer):
     model.train()
-    for bi, d in tqdm(enumerate(data_loader), total=int(len(dataset/data_loader.batch_size))):
+    for bi, d in tqdm(enumerate(data_loader), total=int(len(dataset) /data_loader.batch_size)):
         image = d["image"]
         grapheme_root = d["grapheme_root"]
         vowel_diacritic = d["vowel_diacritic"]
