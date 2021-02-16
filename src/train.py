@@ -125,7 +125,7 @@ def main():
         scheduler.step(val_score)
 
         torch.save(model.state_dict(),
-                   f"{BASE_MODEL}_fold{VALIDATION_FOLDS[0]}.bin")
+                   f"../models/{BASE_MODEL}_fold{VALIDATION_FOLDS[0]}.bin")
 
 
 if __name__ == "__main__":
