@@ -121,7 +121,7 @@ def main():
 
     for epoch in range(EPOCHS):
         train(train_dataset, train_loader, model, optimizer)
-        val_score = evaluate(train_dataset, train_loader, model)
+        val_score = evaluate(valid_dataset, train_loader, model)
         scheduler.step(val_score)
 
         torch.save(model.state_dict(),
