@@ -60,7 +60,7 @@ def evaluate(dataset, data_loader, model):
     model.eval()
     final_loss = 0
     counter = 0
-    for bi, d in tqdm(enumerate(data_loader), total=int(len(dataset/data_loader.batch_size))):
+    for bi, d in tqdm(enumerate(data_loader), total=int(len(dataset) / data_loader.batch_size)):
         counter = counter + 1
         image = d["image"]
         grapheme_root = d["grapheme_root"]
@@ -113,7 +113,7 @@ def main():
     )
 
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
-    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateu(optimizer, mode="min",
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode="min",
                                                           patience=5, factor=0.3, verbose=True)
 
     if torch.cuda.device_count() > 1:
