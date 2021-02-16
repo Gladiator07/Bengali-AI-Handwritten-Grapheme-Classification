@@ -1,7 +1,7 @@
 import os
 import ast
 import config
-import tqdm
+from tqdm import tqdm
 import torch
 import torch.nn as nn
 from model_dispatcher import MODEL_DISPATCHER
@@ -22,7 +22,7 @@ MODEL_STD = ast.literal_eval(os.environ.get("MODEL_STD"))
 
 TRAINING_FOLDS = ast.literal_eval(os.environ.get("TRAINING_FOLDS"))
 VALIDATION_FOLDS = ast.literal_eval(os.environ.get("VALIDATION_FOLDS"))
-BASE_MODEL = int(os.environ.get("BASE_MODEL"))
+BASE_MODEL = os.environ.get("BASE_MODEL")
 
 
 def loss_fn(outputs, targets):
@@ -117,11 +117,11 @@ def main():
                                                           patience=5, factor=0.3, verbose=True)
 
     if torch.cuda.device_count() > 1:
-        model = nn.DataParallel()
+        model = nn.DataParallel(model)
 
     for epoch in range(EPOCHS):
-        train()
-        val_score = evaluate()
+        train(train_dataset, train_loader, model, optimizer)
+        val_score = evaluate(train_dataset, train_loader, model)
         scheduler.step(val_score)
 
         torch.save(model.state_dict(),
