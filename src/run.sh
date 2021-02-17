@@ -9,6 +9,7 @@ export MODEL_STD="(0.229, 0.224, 0.225)"
 export BASE_MODEL="resnet34"
 
 export TRAINING_FOLDS_CSV="/root/input/train_folds.csv"
+export MODEL_DIR="../models"
 
 export TRAINING_FOLDS="(0, 1, 2, 3)"
 export VALIDATION_FOLDS="(4,)"
