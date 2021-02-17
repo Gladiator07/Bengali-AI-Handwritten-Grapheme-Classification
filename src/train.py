@@ -109,7 +109,7 @@ def main():
     valid_loader = torch.utils.data.DataLoader(
         dataset=valid_dataset,
         batch_size=TEST_BATCH_SIZE,
-        shuffle=True,
+        shuffle=False,
         num_workers=4
     )
 
