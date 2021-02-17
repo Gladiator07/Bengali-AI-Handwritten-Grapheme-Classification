@@ -26,6 +26,6 @@ export TRAINING_FOLDS="(0, 4, 2, 3)"
 export VALIDATION_FOLDS="(1,)"
 python3 train.py
 
-export TRAINING_FOLDS="(0, 4, 2, 3)"
+export TRAINING_FOLDS="(4, 1, 2, 3)"
 export VALIDATION_FOLDS="(0,)"
 python3 train.py
