@@ -23,7 +23,7 @@ MODEL_STD = ast.literal_eval(os.environ.get("MODEL_STD"))
 TRAINING_FOLDS = ast.literal_eval(os.environ.get("TRAINING_FOLDS"))
 VALIDATION_FOLDS = ast.literal_eval(os.environ.get("VALIDATION_FOLDS"))
 BASE_MODEL = os.environ.get("BASE_MODEL")
-
+MODEL_DIR = os.environ.get("MODEL_DIR")
 
 def loss_fn(outputs, targets):
     o1, o2, o3 = outputs
@@ -124,8 +124,9 @@ def main():
         val_score = evaluate(valid_dataset, valid_loader, model)
         scheduler.step(val_score)
 
+        PATH = os.path.join(MODEL_DIR, f"{BASE_MODEL}_fold{VALIDATION_FOLDS[0]}.bin")
         torch.save(model.state_dict(),
-                   f"../models/{BASE_MODEL}_fold{VALIDATION_FOLDS[0]}.bin")
+                   PATH)
 
 
 if __name__ == "__main__":
