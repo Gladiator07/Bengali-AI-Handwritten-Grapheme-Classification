@@ -25,6 +25,7 @@ VALIDATION_FOLDS = ast.literal_eval(os.environ.get("VALIDATION_FOLDS"))
 BASE_MODEL = os.environ.get("BASE_MODEL")
 MODEL_DIR = os.environ.get("MODEL_DIR")
 
+
 def loss_fn(outputs, targets):
     o1, o2, o3 = outputs
     t1, t2, t3 = targets
@@ -37,7 +38,7 @@ def loss_fn(outputs, targets):
 
 def train(dataset, data_loader, model, optimizer):
     model.train()
-    for bi, d in tqdm(enumerate(data_loader), total=int(len(dataset) /data_loader.batch_size)):
+    for bi, d in tqdm(enumerate(data_loader), total=int(len(dataset) / data_loader.batch_size)):
         image = d["image"]
         grapheme_root = d["grapheme_root"]
         vowel_diacritic = d["vowel_diacritic"]
@@ -114,7 +115,7 @@ def main():
 
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode="min",
-                                                          patience=5, factor=0.3, verbose=True)
+                                                           patience=5, factor=0.3, verbose=True)
 
     if torch.cuda.device_count() > 1:
         model = nn.DataParallel(model)
@@ -124,7 +125,8 @@ def main():
         val_score = evaluate(valid_dataset, valid_loader, model)
         scheduler.step(val_score)
 
-        PATH = os.path.join(MODEL_DIR, f"{BASE_MODEL}_fold{VALIDATION_FOLDS[0]}.bin")
+        PATH = os.path.join(
+            MODEL_DIR, f"{BASE_MODEL}_fold{VALIDATION_FOLDS[0]}.bin")
         torch.save(model.state_dict(),
                    PATH)
 
