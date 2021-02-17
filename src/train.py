@@ -20,8 +20,10 @@ TEST_BATCH_SIZE = int(os.environ.get("TEST_BATCH_SIZE"))
 MODEL_MEAN = ast.literal_eval(os.environ.get("MODEL_MEAN"))
 MODEL_STD = ast.literal_eval(os.environ.get("MODEL_STD"))
 
-TRAINING_FOLDS = ast.literal_eval(os.environ.get("TRAINING_FOLDS"))
-VALIDATION_FOLDS = ast.literal_eval(os.environ.get("VALIDATION_FOLDS"))
+TRAINING_FOLDS = tuple(map(int, os.environ.get("TRAINING_FOLDS").split(' ')))
+
+
+VALIDATION_FOLDS = tuple(map(int, os.environ.get("VALIDATION_FOLDS")))
 BASE_MODEL = os.environ.get("BASE_MODEL")
 MODEL_DIR = os.environ.get("MODEL_DIR")
 
@@ -76,6 +78,7 @@ def evaluate(dataset, data_loader, model):
         targets = (grapheme_root, vowel_diacritic, consonant_diacritic)
         loss = loss_fn(outputs, targets)
         final_loss += loss
+        print(f"Loss: {final_loss}")
         return final_loss / counter
 
 
