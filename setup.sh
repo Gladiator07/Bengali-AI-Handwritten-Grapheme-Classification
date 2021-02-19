@@ -5,7 +5,7 @@ echo "This script will set your kaggle api-key to Kaggle api, download data, cre
 echo "Installing dependencies"
 pip3 install iterative-stratification # for MultiLabelStratifiedKfold
 pip3 install pretrainedmodels # for pretrained models in PyTorch
-pip3 install kaggle --upgrade
+pip3 install --upgrade --force-reinstall --no-deps kaggle
 
 # Put your Kaggle api key path here
 echo "Fetching your Kaggle API Key"
